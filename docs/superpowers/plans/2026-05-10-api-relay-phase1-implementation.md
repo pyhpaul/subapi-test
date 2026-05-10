@@ -315,7 +315,7 @@ services:
     networks:
       - relay-net
     healthcheck:
-      test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -o '\"success\":\\s*true' || exit 1"]
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -q '\"success\"[[:space:]]*:[[:space:]]*true' || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -450,8 +450,8 @@ volumes:
 
 ```powershell
 param(
-    [string]$NewApiSource = "..\..\..\.research\new-api",
-    [string]$Sub2ApiSource = "..\..\..\.research\sub2api",
+    [string]$NewApiSource = "..\..\.research\new-api",
+    [string]$Sub2ApiSource = "..\..\.research\sub2api",
     [string]$NewApiImage = "api-relay/new-api:543cc64",
     [string]$Sub2ApiImage = "api-relay/sub2api:dbc8ae"
 )
