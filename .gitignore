@@ -1,0 +1,6 @@
+.research/
+.env
+**/.env
+backups/
+*.log
+manifest.sha256
