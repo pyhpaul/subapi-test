@@ -16,3 +16,4 @@ Primary rules:
 - Query API keys are rejected at Nginx.
 - Employee billing is based on New API usage.
 - The public endpoint exposes API paths only; employee self-service web UI is deferred until it can be isolated from admin surfaces.
+- Linux deployment can use `scripts/New-Secrets.py` and `scripts/Build-Images.sh`; PowerShell scripts remain available for Windows operators.

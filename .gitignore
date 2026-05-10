@@ -4,3 +4,6 @@
 backups/
 *.log
 manifest.sha256
+*.tar
+infra/api-relay-phase1/.build-context/
+__pycache__/

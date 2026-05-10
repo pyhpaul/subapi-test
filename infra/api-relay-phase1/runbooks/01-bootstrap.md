@@ -8,6 +8,13 @@ Run all commands from `infra/api-relay-phase1`.
 .\scripts\New-Secrets.ps1
 ```
 
+Linux:
+
+```bash
+python3 scripts/New-Secrets.py
+chmod 600 .env
+```
+
 Expected:
 
 - `.env` exists.
@@ -17,6 +24,14 @@ Expected:
 
 ```powershell
 .\scripts\Build-Images.ps1
+```
+
+Linux:
+
+```bash
+NEW_API_SOURCE=/home/pyh/api-relay-sources/new-api \
+SUB2API_SOURCE=/home/pyh/api-relay-sources/sub2api \
+bash scripts/Build-Images.sh
 ```
 
 Expected:
