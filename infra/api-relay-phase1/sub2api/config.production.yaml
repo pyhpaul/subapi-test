@@ -1,0 +1,139 @@
+server:
+  host: "0.0.0.0"
+  port: 8080
+  mode: "release"
+  frontend_url: ""
+  trusted_proxies: []
+  max_request_body_size: 67108864
+  h2c:
+    enabled: true
+    max_concurrent_streams: 50
+    idle_timeout: 75
+    max_read_frame_size: 1048576
+    max_upload_buffer_per_connection: 2097152
+    max_upload_buffer_per_stream: 524288
+
+run_mode: "standard"
+
+cors:
+  allowed_origins: []
+  allow_credentials: false
+
+security:
+  url_allowlist:
+    enabled: true
+    upstream_hosts:
+      - "api.openai.com"
+      - "api.anthropic.com"
+      - "generativelanguage.googleapis.com"
+      - "cloudcode-pa.googleapis.com"
+    pricing_hosts:
+      - "raw.githubusercontent.com"
+    crs_hosts: []
+    allow_private_hosts: false
+    allow_insecure_http: false
+  response_headers:
+    enabled: true
+    additional_allowed: []
+    force_remove: []
+  csp:
+    enabled: true
+    policy: "default-src 'self'; script-src 'self' __CSP_NONCE__ https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https:; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+  proxy_probe:
+    insecure_skip_verify: false
+  proxy_fallback:
+    allow_direct_on_error: false
+
+gateway:
+  response_header_timeout: 600
+  max_body_size: 67108864
+  upstream_response_read_max_bytes: 8388608
+  proxy_probe_response_read_max_bytes: 1048576
+  gemini_debug_response_headers: false
+  connection_pool_isolation: "account_proxy"
+  force_codex_cli: false
+  codex_image_generation_bridge_enabled: false
+  openai_passthrough_allow_timeout_headers: false
+  openai_ws:
+    enabled: true
+    oauth_enabled: true
+    apikey_enabled: true
+    force_http: false
+    responses_websockets: false
+    responses_websockets_v2: true
+    mode_router_v2_enabled: false
+    ingress_mode_default: ctx_pool
+    max_conns_per_account: 64
+    min_idle_per_account: 2
+    max_idle_per_account: 8
+    dynamic_max_conns_by_account_concurrency_enabled: true
+    oauth_max_conns_factor: 1.0
+    apikey_max_conns_factor: 1.0
+    dial_timeout_seconds: 10
+    read_timeout_seconds: 900
+    write_timeout_seconds: 120
+    fallback_cooldown_seconds: 30
+    retry_total_budget_ms: 5000
+    lb_top_k: 7
+    sticky_session_ttl_seconds: 3600
+    session_hash_read_old_fallback: true
+    session_hash_dual_write_old: true
+    metadata_bridge_enabled: true
+    sticky_response_id_ttl_seconds: 3600
+    scheduler_score_weights:
+      priority: 1.0
+      load: 1.0
+      queue: 0.7
+      error_rate: 0.8
+      ttft: 0.5
+  max_idle_conns: 512
+  max_idle_conns_per_host: 64
+  max_conns_per_host: 256
+  idle_conn_timeout_seconds: 90
+  max_upstream_clients: 1000
+  client_idle_ttl_seconds: 900
+  concurrency_slot_ttl_minutes: 30
+  stream_data_interval_timeout: 180
+  stream_keepalive_interval: 10
+  max_line_size: 41943040
+  log_upstream_error_body: false
+  log_upstream_error_body_max_bytes: 0
+  failover_on_400: false
+  scheduling:
+    sticky_session_max_waiting: 3
+    sticky_session_wait_timeout: 120s
+    fallback_wait_timeout: 30s
+    fallback_max_waiting: 100
+    load_batch_enabled: true
+    slot_cleanup_interval: 30s
+    db_fallback_enabled: true
+    outbox_poll_interval_seconds: 1
+    outbox_lag_warn_seconds: 5
+    outbox_lag_rebuild_seconds: 10
+    outbox_lag_rebuild_failures: 3
+    outbox_backlog_rebuild_rows: 10000
+    full_rebuild_interval_seconds: 300
+
+concurrency:
+  ping_interval: 10
+
+ops:
+  enabled: true
+
+default:
+  admin_email: "admin@api-relay.internal"
+  admin_password: ""
+  user_concurrency: 5
+  user_balance: 0
+  api_key_prefix: "sk-"
+  rate_multiplier: 1.0
+
+rate_limit:
+  overload_cooldown_minutes: 10
+
+billing:
+  circuit_breaker:
+    enabled: true
+    failure_threshold: 5
+    reset_timeout_seconds: 30
+    half_open_requests: 3
