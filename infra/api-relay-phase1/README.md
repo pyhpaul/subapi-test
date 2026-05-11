@@ -17,3 +17,13 @@ Primary rules:
 - Employee billing is based on New API usage.
 - The public endpoint exposes API paths only; employee self-service web UI is deferred until it can be isolated from admin surfaces.
 - Linux deployment can use `scripts/New-Secrets.py` and `scripts/Build-Images.sh`; PowerShell scripts remain available for Windows operators.
+
+Operator shortcut:
+
+```bash
+cd /home/pyh/api-relay-phase1
+chmod +x scripts/Relay-Wizard.sh
+./scripts/Relay-Wizard.sh
+```
+
+See `runbooks/07-interactive-wizard.md` for the guided first-time setup flow.
